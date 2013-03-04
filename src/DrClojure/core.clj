@@ -15,17 +15,15 @@
 (def ^TextArea text-out (new TextArea))
 (def ^TextField textf (new TextField))
 (def ^Button button (new Button "Eval"))
-
-(defn append-text-out [^String text]
-  (. SwingUtilities invokeLater (proxy [Runnable] []
-    (run [] (. text-out append text)))))
     
 (def out
   (proxy [Writer] []
     (close [])
     (flush [])
     (write [thing]
-      (append-text-out thing))))
+      (. SwingUtilities invokeLater
+        (proxy [Runnable] []
+          (run [] (. text-out append thing)))))))
 
 (. button addActionListener
   (proxy [ActionListener] []
