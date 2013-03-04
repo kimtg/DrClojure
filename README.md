@@ -1,8 +1,8 @@
 # DrClojure
 
-DrClojure is a clojure IDE.
+DrClojure is a Clojure IDE.
 
-It is written in clojure with (set! *warn-on-reflection* true).
+It is written in Clojure with (set! *warn-on-reflection* true).
 
 Features: 
 
