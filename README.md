@@ -11,6 +11,22 @@ Features:
 
 ## Usage
 
+### Compile
+```
+lein uberjar
+```
+
+### Run
+
+Double click JAR_FILE
+
+or
+```
+java -jar JAR_FILE
+```
+
+### GUI
+
 TextArea at the top is for code (Press Eval).
 
 TextField in the middle is for immediate execution (Press Enter).
