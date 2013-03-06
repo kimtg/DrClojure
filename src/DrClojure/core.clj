@@ -58,6 +58,7 @@
       (. text-out append (str "> " code "\n" result \newline)))))
 
 (def ^javax.swing.JFileChooser fc (new javax.swing.JFileChooser))
+(. fc setFileFilter (new javax.swing.filechooser.FileNameExtensionFilter "Clojure file (*.clj)" (into-array ["clj"])))
 
 (def ^JPanel panel (new JPanel))
 
