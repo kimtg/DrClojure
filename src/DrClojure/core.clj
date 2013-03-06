@@ -12,6 +12,9 @@
 
 (def aCurFileName (atom ""))
 
+(. javax.swing.UIManager setLookAndFeel 
+  (. javax.swing.UIManager getSystemLookAndFeelClassName)) ; make look native
+
 (def ^JFrame frame (new JFrame))
 (defn update-title []
   (. frame setTitle (str (deref aCurFileName) " - " title)))
