@@ -10,6 +10,7 @@ Features:
 * Standard out redirection
 
 ## Screenshot
+![DrClojure Screenshot](https://bitbucket.org/ktg/drclojure/downloads/DrClojure-0.1.8.PNG)
 ```
 +----------------------------------+
 | - DrClojure               _ [] X |
