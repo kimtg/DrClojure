@@ -2,7 +2,7 @@
 
 DrClojure is a Clojure IDE.
 
-It is written in Clojure with (set! *warn-on-reflection* true).
+It is written in Clojure.
 
 Features: 
 
@@ -58,6 +58,6 @@ TextArea at the bottom is output.
 
 ## License
 
-Copyright 2012-2013 Kim, Taegyoon
+Copyright 2012-2015 Kim, Taegyoon
 
 Distributed under the Eclipse Public License, the same as Clojure.

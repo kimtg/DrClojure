@@ -10,3 +10,5 @@ pom.xml
 .lein-plugins
 /bin
 ccw.repl.cmdhistory.prefs
+.lein-repl-history
+.nrepl-port
