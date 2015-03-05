@@ -18,10 +18,11 @@
     (. javax.swing.UIManager getSystemLookAndFeelClassName)) ; make look native
   
   (def frame (new JFrame))
-  (defn update-title []
+  (defn updateFileName [fileName]
+    (reset! aCurFileName fileName)
     (. frame setTitle (str (deref aCurFileName) " - " title)))
   
-  (update-title)
+  (updateFileName "")
   
   (def text (new TextArea 20 80))
   (def text-out (new TextArea 6 80))
@@ -35,7 +36,9 @@
       (write [thing]
         (. SwingUtilities invokeLater
           (proxy [Runnable] []
-            (run [] (. text-out append thing)))))))
+            (run [] (. text-out append
+                      (if (integer? thing) (String. (char-array 1 (char thing))) ; handle char
+                        thing))))))))
   
   (defn eval-code [code]
     (try (binding [*out* out]
@@ -78,8 +81,7 @@
   (. menuNew addActionListener
     (proxy [ActionListener] []
       (actionPerformed [e]
-        (reset! aCurFileName "")
-        (update-title)
+        (updateFileName "")
         (. text setText ""))))
   
   (. menuOpen addActionListener
@@ -88,8 +90,7 @@
         (def ret (. fc showOpenDialog nil))
         (when (== ret javax.swing.JFileChooser/APPROVE_OPTION)
           (def fileName (. (. fc getSelectedFile) getCanonicalPath))
-          (reset! aCurFileName fileName)
-          (update-title) 
+          (updateFileName fileName) 
           (. text setText (slurp fileName))))))
   
   (defn fileSave [fileName]
@@ -99,8 +100,7 @@
     (def ret (. fc showSaveDialog nil))
     (when (== ret javax.swing.JFileChooser/APPROVE_OPTION)
       (def fileName (. (. fc getSelectedFile) getCanonicalPath))
-      (reset! aCurFileName fileName)
-      (update-title)        
+      (updateFileName fileName)        
       (fileSave fileName)))
   
   (. menuSave addActionListener
