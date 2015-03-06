@@ -53,7 +53,7 @@
   (defn textf-action []
     (def code (. textf getText))
     (. text-out append (str "> " code "\n" (str (eval-code code)) \newline))
-    (. textf setText ""))
+    (. textf setText nil))
   
   (. textf addActionListener
     (proxy [ActionListener] []
@@ -67,21 +67,25 @@
   
   (def menuBar (new JMenuBar))
   (def menuFile (new JMenu "File"))
-  (def menuNew (new JMenuItem "New"))
-  (def menuOpen (new JMenuItem "Open..."))
-  (def menuSave (new JMenuItem "Save"))
-  (def menuSaveAs (new JMenuItem "Save As..."))
+  (.setMnemonic menuFile (int \f))
+  (def menuNew (new JMenuItem "New" (int \n)))
+  (def menuOpen (new JMenuItem "Open..." (int \o)))
+  (def menuSave (new JMenuItem "Save" (int \s)))
+  (def menuSaveAs (new JMenuItem "Save As..." (int \a)))
+  (def menuExit (new JMenuItem "Exit" (int \x)))
   (. menuBar add menuFile)
   (. menuFile add menuNew)
   (. menuFile add menuOpen)
   (. menuFile add menuSave)
   (. menuFile add menuSaveAs)
+  (. menuFile addSeparator)
+  (. menuFile add menuExit)
   (. frame setJMenuBar menuBar)
   
   (. menuNew addActionListener
     (proxy [ActionListener] []
       (actionPerformed [e]
-        (updateFileName "")
+        (updateFileName "")        
         (. text setText ""))))
   
   (. menuOpen addActionListener
@@ -113,7 +117,12 @@
   (. menuSaveAs addActionListener
     (proxy [ActionListener] []
       (actionPerformed [e]
-        (fileSaveAs)))))
+        (fileSaveAs))))
+
+  (. menuExit addActionListener
+    (proxy [ActionListener] []
+      (actionPerformed [e]
+        (System/exit 0)))))
 
 (defn -main []
   (init)
