@@ -9,7 +9,7 @@
     (java.awt.event ActionEvent ActionListener)
     (java.io Writer)))
 
-(defn init []
+(defn -main []
   (def title "DrClojure")
   
   (def aCurFileName (atom ""))
@@ -25,10 +25,10 @@
   (updateFileName "")
   
   (def text (new TextArea 20 80))
-  (def text-out (new TextArea 6 80))
+  (def text-out (new TextArea 7 80))
   (def textf (new TextField))
   (def button (new Button "Eval"))
-      
+  
   (def out
     (proxy [Writer] []
       (close [])
@@ -48,17 +48,16 @@
   (. button addActionListener
     (proxy [ActionListener] []
       (actionPerformed [e]
-        (. text-out append (str (str (eval-code (. text getText))) \newline)))))
+        (. text-out append (prn-str (eval-code (. text getText)))))))
   
-  (defn textf-action []
-    (def code (. textf getText))
-    (. text-out append (str "> " code "\n" (str (eval-code code)) \newline))
-    (. textf setText nil))
+  (defn eval-print [code]
+    (. text-out append (str "> " code "\n" (prn-str (eval-code code)))))
   
   (. textf addActionListener
     (proxy [ActionListener] []
       (actionPerformed [e]
-        (textf-action))))
+        (eval-print (. textf getText))
+        (.setText textf nil))))
   
   (def fc (new javax.swing.JFileChooser))
   (. fc setFileFilter (new javax.swing.filechooser.FileNameExtensionFilter "Clojure file (*.clj)" (into-array ["clj"])))
@@ -122,14 +121,12 @@
     (proxy [ActionListener] []
       (actionPerformed [e]
         (fileSaveAs))))
-
+  
   (. menuExit addActionListener
     (proxy [ActionListener] []
       (actionPerformed [e]
-        (System/exit 0)))))
-
-(defn -main []
-  (init)
+        (System/exit 0))))
+  
   (. frame setDefaultCloseOperation JFrame/EXIT_ON_CLOSE)
   (let [font (new Font "Monospaced" Font/PLAIN 12)]
     (. text setFont font)
@@ -143,5 +140,4 @@
   (. frame add panel BorderLayout/SOUTH)
   (. frame pack)
   (. frame setVisible true)
-  (. textf setText "(clojure-version)")
-  (textf-action))
+  (doseq [s ["(clojure-version)" "(use 'clojure.repl)"]] (eval-print s)))
