@@ -94,28 +94,26 @@
   (. menuOpen addActionListener
     (proxy [ActionListener] []
       (actionPerformed [e]
-        (def ret (. fc showOpenDialog nil))
-        (when (== ret javax.swing.JFileChooser/APPROVE_OPTION)
-          (def fileName (. (. fc getSelectedFile) getCanonicalPath))
-          (updateFileName fileName) 
-          (. text setText (slurp fileName))))))
+        (when (= (. fc showOpenDialog nil) javax.swing.JFileChooser/APPROVE_OPTION)
+          (let [fileName (.. fc getSelectedFile getCanonicalPath)]
+		          (updateFileName fileName)
+		          (. text setText (slurp fileName)))))))
   
   (defn fileSave [fileName]
     (spit fileName (. text getText)))
   
-  (defn fileSaveAs []
-    (def ret (. fc showSaveDialog nil))
-    (when (== ret javax.swing.JFileChooser/APPROVE_OPTION)
-      (def fileName (. (. fc getSelectedFile) getCanonicalPath))
-      (updateFileName fileName)        
-      (fileSave fileName)))
+  (defn fileSaveAs []    
+    (when (= (. fc showSaveDialog nil) javax.swing.JFileChooser/APPROVE_OPTION)
+      (let [fileName (.. fc getSelectedFile getCanonicalPath)]
+        (updateFileName fileName)
+        (fileSave fileName))))
   
   (. menuSave addActionListener
     (proxy [ActionListener] []
       (actionPerformed [e]      
         (if (= (deref aCurFileName) "")
           (fileSaveAs) 
-          (fileSave fileName)))))
+          (fileSave @aCurFileName)))))
   
   (. menuSaveAs addActionListener
     (proxy [ActionListener] []
