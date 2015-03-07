@@ -4,7 +4,7 @@
 (ns DrClojure.core
   (:gen-class)
   (:import
-    (javax.swing JFrame SwingUtilities JPanel BoxLayout JMenuBar JMenu JMenuItem)
+    (javax.swing JFrame SwingUtilities JPanel BoxLayout JMenuBar JMenu JMenuItem KeyStroke)
     (java.awt Button TextArea BorderLayout Font TextField)
     (java.awt.event ActionEvent ActionListener)
     (java.io Writer)))
@@ -70,8 +70,12 @@
   (.setMnemonic menuFile (int \f))
   (def menuNew (new JMenuItem "New" (int \n)))
   (def menuOpen (new JMenuItem "Open..." (int \o)))
-  (def menuSave (new JMenuItem "Save" (int \s)))
+  (def menuSave (new JMenuItem "Save" (int \s)))  
   (def menuSaveAs (new JMenuItem "Save As..." (int \a)))
+  (.setAccelerator menuNew (KeyStroke/getKeyStroke "control N"))
+  (.setAccelerator menuOpen (KeyStroke/getKeyStroke "control O"))
+  (.setAccelerator menuSave (KeyStroke/getKeyStroke "control S"))
+  (.setAccelerator menuSaveAs (KeyStroke/getKeyStroke "control alt S"))  
   (def menuExit (new JMenuItem "Exit" (int \x)))
   (. menuBar add menuFile)
   (. menuFile add menuNew)

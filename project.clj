@@ -1,4 +1,4 @@
-(defproject DrClojure "0.1.13"
+(defproject DrClojure "0.1.14"
   :description "DrClojure"
   :url "http://steloflute.tistory.com/entry/DrClojure"
   :license {:name "Eclipse Public License"
