@@ -1,6 +1,3 @@
-; DrClojure
-; (C) 2012-2015 Kim, Taegyoon
-
 (ns DrClojure.core
   (:gen-class)
   (:import

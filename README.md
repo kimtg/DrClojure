@@ -58,6 +58,6 @@ TextArea at the bottom is output.
 
 ## License
 
-Copyright 2012-2015 Kim, Taegyoon
+Copyright 2012-2020 Kim, Taegyoon
 
 Distributed under the Eclipse Public License, the same as Clojure.
