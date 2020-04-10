@@ -22,33 +22,21 @@
   (updateFileName "")
   
   (def text (new TextArea 20 80))
-  (def text-out (new TextArea 7 80))
   (def textf (new TextField))
   (def button (new Button "Eval"))
   
-  (def out
-    (proxy [Writer] []
-      (close [])
-      (flush [])
-      (write [thing]
-        (. SwingUtilities invokeLater
-          (proxy [Runnable] []
-            (run [] (. text-out append
-                      (if (integer? thing) (String. (char-array 1 (char thing))) ; handle char
-                        thing))))))))
-  
+
   (defn eval-code [code]
-    (try (binding [*out* out]
-           (. clojure.lang.Compiler load (new java.io.StringReader (str "(ns user) " code))))
+    (try (. clojure.lang.Compiler load (new java.io.StringReader (str "(ns user) " code)))
       (catch Exception e e)))
   
   (. button addActionListener
     (proxy [ActionListener] []
       (actionPerformed [e]
-        (. text-out append (prn-str (eval-code (. text getText)))))))
+        (println (eval-code (. text getText))))))
   
   (defn eval-print [code]
-    (. text-out append (str "> " code "\n" (prn-str (eval-code code)))))
+    (println (str "> " code "\n" (eval-code code))))
   
   (. textf addActionListener
     (proxy [ActionListener] []
@@ -93,8 +81,8 @@
       (actionPerformed [e]
         (when (= (. fc showOpenDialog nil) javax.swing.JFileChooser/APPROVE_OPTION)
           (let [fileName (.. fc getSelectedFile getCanonicalPath)]
-		          (updateFileName fileName)
-		          (. text setText (slurp fileName)))))))
+            (updateFileName fileName)
+            (. text setText (slurp fileName)))))))
   
   (defn fileSave [fileName]
     (spit fileName (. text getText)))
@@ -123,15 +111,13 @@
         (System/exit 0))))
   
   (. frame setDefaultCloseOperation JFrame/EXIT_ON_CLOSE)
-  (let [font (new Font "Monospaced" Font/PLAIN 12)]
+  (let [font (new Font Font/MONOSPACED Font/PLAIN 12)]
     (. text setFont font)
-    (. text-out setFont font)
     (. textf setFont font))
   (. panel setLayout (new BoxLayout panel BoxLayout/PAGE_AXIS))
   (. frame add button BorderLayout/NORTH)
   (. frame add text)
   (. panel add textf)
-  (. panel add text-out)
   (. frame add panel BorderLayout/SOUTH)
   (. frame pack)
   (. frame setVisible true)

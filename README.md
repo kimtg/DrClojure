@@ -7,10 +7,9 @@ It is written in Clojure.
 Features: 
 
 * Newbie-friendly
-* Standard out redirection
 
 ## Screenshot
-![DrClojure Screenshot](https://bitbucket.org/ktg/drclojure/downloads/DrClojure-0.1.8.PNG)
+![DrClojure Screenshot](https://raw.githubusercontent.com/kimtg/DrClojure/master/DrClojure.PNG)
 ```
 +----------------------------------+
 | - DrClojure               _ [] X |
@@ -26,10 +25,7 @@ Features:
 +----------------------------------+
 |                                  |
 +----------------------------------+
-|0                                 |
-|1                                 |
-|2                                 |
-+----------------------------------+
+
 ```
 
 ## Usage
@@ -40,10 +36,6 @@ lein uberjar
 ```
 
 ### Run
-
-Double click JAR_FILE
-
-or
 ```
 java -jar JAR_FILE
 ```
@@ -53,8 +45,6 @@ java -jar JAR_FILE
 TextArea at the top is for code (Press Eval).
 
 TextField in the middle is for immediate execution (Press Enter).
-
-TextArea at the bottom is output.
 
 ## License
 
