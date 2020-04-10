@@ -120,5 +120,6 @@
   (. panel add textf)
   (. frame add panel BorderLayout/SOUTH)
   (. frame pack)
+  (. text requestFocus)
   (. frame setVisible true)
   (doseq [s ["(clojure-version)" "(use 'clojure.repl)"]] (eval-print s)))
