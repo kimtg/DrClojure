@@ -1,8 +1,8 @@
 (ns DrClojure.core
   (:gen-class)
   (:import
-    (javax.swing JFrame SwingUtilities JPanel BoxLayout JMenuBar JMenu JMenuItem KeyStroke)
-    (java.awt Button TextArea BorderLayout Font TextField)
+    (javax.swing JFrame SwingUtilities JPanel BoxLayout JMenuBar JMenu JMenuItem KeyStroke JButton JTextArea JTextField)
+    (java.awt BorderLayout Font)
     (java.awt.event ActionEvent ActionListener)
     (java.io Writer)))
 
@@ -21,10 +21,9 @@
   
   (updateFileName "")
   
-  (def text (new TextArea 20 80))
-  (def textf (new TextField))
-  (def button (new Button "Eval"))
-  
+  (def text (new JTextArea 20 80))
+  (def textf (new JTextField))
+  (def button (new JButton "Run"))  
 
   (defn eval-code [code]
     (try (. clojure.lang.Compiler load (new java.io.StringReader (str "(ns user) " code)))
@@ -111,7 +110,7 @@
         (System/exit 0))))
   
   (. frame setDefaultCloseOperation JFrame/EXIT_ON_CLOSE)
-  (let [font (new Font Font/MONOSPACED Font/PLAIN 12)]
+  (let [font (new Font "Consolas" Font/PLAIN 14)]
     (. text setFont font)
     (. textf setFont font))
   (. panel setLayout (new BoxLayout panel BoxLayout/PAGE_AXIS))
