@@ -23,8 +23,9 @@
   
   (def text (new JTextArea 20 80))
   (def textf (new JTextField))
-  (def button (new JButton "Run"))  
-
+  (def button (new JButton "Run"))
+  (. button setMnemonic \r)
+  
   (defn eval-code [code]
     (try (. clojure.lang.Compiler load (new java.io.StringReader (str "(ns user) " code)))
       (catch Exception e e)))

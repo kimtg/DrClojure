@@ -1,4 +1,4 @@
-(defproject DrClojure "0.2.2"
+(defproject DrClojure "0.2.3"
   :description "DrClojure"
   :url "https://github.com/kimtg/DrClojure"
   :license {:name "Eclipse Public License"
