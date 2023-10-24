@@ -52,6 +52,6 @@ TextField in the middle is for immediate execution (Press Enter).
 
 ## License
 
-Copyright 2012-2020 Kim, Taegyoon
+Copyright 2012-2023 Kim, Taegyoon
 
 Distributed under the Eclipse Public License, the same as Clojure.
