@@ -39,6 +39,10 @@ lein uberjar
 ```
 java -jar JAR_FILE
 ```
+or
+```
+clj -m DrClojure.core
+```
 
 ### GUI
 
