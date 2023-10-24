@@ -1,7 +1,7 @@
 (ns DrClojure.core
   (:gen-class)
   (:import
-    (javax.swing JFrame SwingUtilities JPanel BoxLayout JMenuBar JMenu JMenuItem KeyStroke JButton JTextArea JTextField)
+    (javax.swing JFrame SwingUtilities JPanel BoxLayout JMenuBar JMenu JMenuItem KeyStroke JButton JTextArea JTextField JScrollPane)
     (java.awt BorderLayout Font)
     (java.awt.event ActionEvent ActionListener)
     (java.io Writer)))
@@ -22,6 +22,7 @@
   (updateFileName "")
   
   (def text (new JTextArea 20 80))
+  (def pane (new JScrollPane text))
   (def textf (new JTextField))
   (def button (new JButton "Run"))
   (. button setMnemonic \r)
@@ -111,12 +112,12 @@
         (System/exit 0))))
   
   (. frame setDefaultCloseOperation JFrame/EXIT_ON_CLOSE)
-  (let [font (new Font "Consolas" Font/PLAIN 14)]
+  (let [font (new Font "Consolas" Font/PLAIN 15)]
     (. text setFont font)
     (. textf setFont font))
   (. panel setLayout (new BoxLayout panel BoxLayout/PAGE_AXIS))
   (. frame add button BorderLayout/NORTH)
-  (. frame add text)
+  (. frame add pane)
   (. panel add textf)
   (. frame add panel BorderLayout/SOUTH)
   (. frame pack)
