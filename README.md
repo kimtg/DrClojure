@@ -46,7 +46,7 @@ clj -m DrClojure.core
 
 ### GUI
 
-TextArea at the top is for code (Press Eval).
+TextArea at the top is for code (Press Run Button).
 
 TextField in the middle is for immediate execution (Press Enter).
 
