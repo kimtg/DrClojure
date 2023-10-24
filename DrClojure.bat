@@ -1,0 +1,1 @@
+powershell clj -m DrClojure.core
